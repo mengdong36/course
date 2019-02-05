@@ -1,0 +1,13 @@
+# Python has become a go-to language for data analysis. With data-focused libraries like pandas, NumPy, and Matplotlib, anyone familiar with Python’s syntax and rules can use it as a powerful tool to process, manipulate, and visualize data.
+
+libraries = ["NumPy", "SciPy", "Pandas", "Matplotlib", "Seaborn"]
+completion = [100, 100, 96, 0, 0]
+
+libraries.append("scikit-learn")
+completion.append(0)
+
+gradebook = list(zip(libraries, completion))
+
+print("Lesson Completion Rates:")
+print(gradebook)
+print("\n")
