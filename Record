@@ -1,0 +1,4 @@
+set obs 500
+gen e = rnormal(0, 2)
+gen x = runiform() - 0.5
+gen y = 1 + 2*x + e
