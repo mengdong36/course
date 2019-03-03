@@ -11,4 +11,3 @@ graph twoway	(lfit liver alcohol)		///
 
 reg liver alcohol europe
 
-//ncdjanjd
