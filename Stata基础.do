@@ -1,7 +1,11 @@
 
 * 画图
+cumul p, gen(cdf_p)
+// use'cumul'to create empirical CDF in a variable called cdf_d
+
 line cdf_p p if p<0.20, sort xline(0.05) yline(0.05)
 //横轴p,纵轴cdf_p,两条直线x=0.05,y=0.05
+//use'sort' option so that p-valuses are plotted in ascending order.
 
 graph twoway	(lfit y x) (scatter y x)	///
 	      ,	title("aa") name(aa, replace)
