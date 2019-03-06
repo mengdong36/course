@@ -79,7 +79,15 @@ line testpower hypoth, yline(0.05) xline(2)	///
 // ’sum' the fraction of times we would have rejected z based on the t critical values
 
 
+*** 二. 参数检验
 
+** Jointing test
 
-
+reg y x1 x2 x3 x4
+test x1+x2+x3 = 1
+lincom x1+x2+x3
+nlcom 1/_b[x4]
+//汇报F statistics; 'test'report two sides test in default; Wald test??
+//'lincom'95% confidence interval
+//use delta method implemented in 'nlcom'
 
