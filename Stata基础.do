@@ -1,5 +1,5 @@
 
-* 画图
+*** 画图
 cumul p, gen(cdf_p)
 // use'cumul'to create empirical CDF in a variable called cdf_d
 
@@ -22,8 +22,11 @@ forvalues i=1/5 {
 		_col(40) "sigma^2=" %6.3f e(rmse)^2		//
 }
 
+分组列表
+tabstat output lnQ, by(gid) stats(mean median min max)
 
-* 回归
+
+*** 回归
 reg
 predict yhat, xb
 //xb表示fitted value
@@ -46,7 +49,7 @@ avlop x2
 //3. regress y_tilda on x2_tilde
 //Parcial out x1, uninterested 
 
-* Variables
+*** Variables
 sort var
 //变量值从小到大
 
@@ -74,6 +77,7 @@ sum D*
 //The noomit option says create all possible dummies and don’t omit the base category
 //To create interactions. The | operator says create only interactions between the indicator variable and the continuous variable 
 //(if we used the *operator instead, it would create the level dummies but we already have those from theprevious command).
+
 reg y ibn.gid ibn.gid#c.(x1 x2 x3), nocons
 //group regression in one single system
 
