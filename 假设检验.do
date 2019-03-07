@@ -81,7 +81,7 @@ line testpower hypoth, yline(0.05) xline(2)	///
 
 *** 二. 参数检验
 
-** Jointing test
+** test command
 
 reg y x1 x2 x3 x4
 test x1+x2+x3 = 1
@@ -90,4 +90,33 @@ nlcom 1/_b[x4]
 //汇报F statistics; 'test'report two sides test in default; Wald test??
 //'lincom'95% confidence interval
 //use delta method implemented in 'nlcom'
+
+//'test' produces a Wald test that depends only on the estimate of the
+//covariance matrix— you may prefer to use the more computationally expensive likelihood-ratio test
+
+* Example 1/2: Testing for a single coefficient against zero or other value
+test 3.region=0
+test 3.region=21
+//This result from test is identical to one presented in the output from regress, which indicates
+//that the t statistic on the 3.region coefficient is 1.863 and that its significance level is 0.069
+
+* Example 3/4: Testing the equality of two coefficients
+test 2.region=4.region
+test 2*(2.region-3*(3.region-4.region))=3.region+2.region+6*(4.region-3.region)
+
+* Example 5: Testing joint hypotheses
+test (2.region=0) (3.region=0) (4.region=0)
+
+* Example 6: Quickly testing coefficients against zero
+test 2.region 3.region 4.region
+
+* Example
+ testparm i(2/4).region, equal
+
+
+
+
+
+
+
 
