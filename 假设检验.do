@@ -92,7 +92,9 @@ nlcom 1/_b[x4]
 //use delta method implemented in 'nlcom'
 
 //'test' produces a Wald test that depends only on the estimate of the
-//covariance matrix— you may prefer to use the more computationally expensive likelihood-ratio test
+//covariance matrix. Wald tests of simple and composite linear hypotheses about the parameters of the
+//most recently fit model.
+
 
 * Example 1/2: Testing for a single coefficient against zero or other value
 test 3.region=0
