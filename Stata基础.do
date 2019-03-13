@@ -9,7 +9,9 @@ line cdf_p p if p<0.20, sort xline(0.05) yline(0.05)
 
 graph twoway	(lfit y x) (scatter y x)	///
 	      ,	title("aa") name(aa, replace)
-//regress y on x, fitted values & scatter plot, 系统存储图形。连续命令换行。
+//'twoway' 多个图画一起？
+//fitted value和x的直线图；实际Y和x的散点图
+//连续命令换行。
 
 hist b, bin(20) normal
 //b的直方图；bin()：几个方块；覆盖一个normal distri
@@ -27,11 +29,16 @@ tabstat output lnQ, by(gid) stats(mean median min max)
 
 
 *** 回归
-reg
+reg 
+
 predict yhat, xb
+predict double yhat if e(sample), xb
 //xb表示fitted value
+// if e(sample) ???
+
 predict ehat, res
-//res表示residuals
+predict ehat, resid
+//res, resid表示residuals
 
 use http://fmwww.bc.edu/ec-p/data/hayashi/nerlove63.dta, clear
 //Nerlove's return to scale study
