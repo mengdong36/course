@@ -56,7 +56,7 @@ reg lnTCp3 lnQ lnp1p3 lnp2p3 [aw=output]
 // (Larger firms have smaller variances.)
 
 
-** FGLS using a general skedastic fn (Greene,9.7;Wooldridge,8.4)
+** 2. FGLS using a general skedastic fn (Greene,9.7;Wooldridge,8.4)
 
  // 1.Estimate and obtain squared residuals, then take logs
  
