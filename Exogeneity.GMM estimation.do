@@ -6,3 +6,7 @@ ssc install ivreg2
 
 ssc install ranktest
 
+
+
+
+
