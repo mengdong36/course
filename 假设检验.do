@@ -49,7 +49,7 @@ hist p, bin(20) percent
 cumul p, gen(cdf_p)
 sum cdf_p, detail
 line cdf_p p, sort
-//看p值得直方图干什么？？
+//看p值得直方图: 概率一点一点增加，pvalue应该均匀分布。
 
 ** 3. Test power
 capture drop hypoth
@@ -78,6 +78,7 @@ line testpower hypoth, yline(0.05) xline(2)	///
 // hypothesized β∈[-4,8]
 // ’sum' the fraction of times we would have rejected z based on the t critical values
 
+//power curve: 横轴b值，纵轴拒绝b的概率；在真实b值附近此概率为5%.
 
 *** 二. 参数检验
 
@@ -235,7 +236,7 @@ line power_ols power_rob power_gls power_fgls power_fglsrob hypoth	///
 	name(power_closeup, replace)
 
 
-
+//GlS should be more precise--have a smaller variance.
 
 
 
