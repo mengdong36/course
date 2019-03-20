@@ -89,7 +89,17 @@ reg y ibn.gid ibn.gid#c.(x1 x2 x3), nocons
 //group regression in one single system
 
 
+*** 数据处理
 
+suest
+
+//Testing cross-equation hypotheses in a multiple equation setting. We
+//want to test a hypothesis involving coefficents estimated for two
+//di¤erent models. The problem is that the disturbance for observation
+//i in model A could be correlated with the disturbance for observation
+//i in model B. We solve this using cluster-robust, by "stacking" the
+//data and designating observation i in model A and observation i in
+//model B to be part of the same "cluster".
 
 
 
