@@ -134,7 +134,12 @@ program define mysimhetgls, rclass
 	return scalar se_ols=_se[x]
 	reg y x, robust
 	return scalar se_rob = _se[x]
-	
+
+//'robust' option to get Shc
+// specify the option "cluster(clustvar)" or "vce(cluster clustvar)", where "clustvar"
+// is the name of the variable identifying the di¤erent groups.
+
+
 *	2.GLS
 	reg y x [aw=1/x^2]
 	return scalar b_gls = _coef[x]
