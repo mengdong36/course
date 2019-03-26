@@ -9,12 +9,18 @@ line cdf_p p if p<0.20, sort xline(0.05) yline(0.05)
 
 graph twoway	(lfit y x) (scatter y x)	///
 	      ,	title("aa") name(aa, replace)
-//'twoway' 多个图画一起？
+//'twoway' 多个图画一起
 //fitted value和x的直线图；实际Y和x的散点图
 //连续命令换行。
 
 hist b, bin(20) normal
 //b的直方图；bin()：几个方块；覆盖一个normal distri
+
+kdensity  b_ols if b_ols>0 & b_ols<2
+//b_ols 的pdf图
+
+
+
 
 用forvale列表
 forvalues i=1/5 {
