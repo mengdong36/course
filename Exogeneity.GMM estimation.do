@@ -1,9 +1,19 @@
+*** 内生性问题的来源
+
 * Endogeneity problem #1: Measurement error in x
 * What do to about measurement error in x?
 * "errors-in-variables" (EIV) regression (the Stata
 * command is eivreg). If we know the variance of the measurement error
 * E(h2i), then we have available a "bias-adjusted" estimator (see the Stata
 * manual), bbEIV . But we rarely know what E(h2i) is.
+
+
+*** 控制变量的选择方法
+
+pdslasso 
+ivlasso 
+* by Ahrens-Hansen-Scha¤er implement PDS(post-double selection) and related methods.
+
 
 
 *** Preparation
