@@ -49,6 +49,14 @@ predict ehat, resid
 use http://fmwww.bc.edu/ec-p/data/hayashi/nerlove63.dta, clear
 //Nerlove's return to scale study
 
+use maketable8, clear
+keep if baseco==1
+//比较发展殖民起源
+//gdp 与 政府机构质量的关系研究
+//GMM法
+
+
+
 * Constraint regression
 constraint 1 
 constraint 1 x1+x2+x3 =1
