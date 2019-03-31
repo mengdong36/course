@@ -19,7 +19,10 @@ ivlasso
 *** Preparation
 
 ssc install ivreg2
-//IV/GMM estimator
+// IV/GMM estimator
+// ivreg <depvar> <exog vars> (<endog vars> = <instruments>)
+
+
 
 ssc install ranktest
 
@@ -45,7 +48,7 @@ program define mysimendog, rclass
 	return scalar b_iv=_coef[x]
 	if _coef[x] > 2 {return scalar b_iv=2}
 	if _coef[x] < 0 {return scalar b_iv=0}
-
+//只有一个内生的regressor, 一个外生的工具。 没有外生的vars. 所以 ivreg y (x=z) 	
 end
 
 * 2. simulate
@@ -89,4 +92,44 @@ cap drop mse*
 gen mse_ols=(b_ols-1)^2
 gen mse_iv =(b_iv -1)^2
 sum mse_ols mse_iv
+
+
+*** AJR 比较发展殖民起源
+
+use maketable8, clear
+keep if baseco==1
+
+// ivreg2 y x1 x2 x3 (v1 v2 = z1 z2 z3 z4), <options>
+//     y  = dependent variable
+//     xs = exogenous regressors
+//     vs = endogenous regressors
+//     zs = excluded instruments
+
+// Covariance options:
+//     nothing = classical S, homoskedasticity assumed
+//     robust = robust S_HC, heteroskedasticity-consistent
+
+// Estimator options:
+//     nothing = OLS or IV
+//     gmm2s = 2-step feasible efficient GMM
+//     cue = CUE, continuously-updated GMM
+
+// GMM Distance tests:
+//   In options (after comma):
+//     endog(v1 v2 ...) =  test if endogenous regressors
+//                         v1, v2, etc. can be treated
+//                         as exogenous.
+//                         Saved test stat =e(estat).
+//     orthog(x1 x2 ...) = test if exogenous regressors
+//                         x1, x2, etc. should be treated
+//                         as endogenous regressors.
+//                         Saved test stat =e(cstat).
+//     orthog(z1 z2 ...) = test if excluded instruments
+//                         z1, z2, etc. are endogenous and
+//                         should be dropped as excluded IVs.
+//                         Saved test stat =e(cstat).
+
+
+
+
 
