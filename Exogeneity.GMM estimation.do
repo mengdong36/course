@@ -1,11 +1,11 @@
-*** 内生性问题的来源
+*** 内生性问题-测量误差
 
 * Endogeneity problem #1: Measurement error in x
 * What do to about measurement error in x?
 * "errors-in-variables" (EIV) regression (the Stata
 * command is eivreg). If we know the variance of the measurement error
 * E(h2i), then we have available a "bias-adjusted" estimator (see the Stata
-* manual), bbEIV . But we rarely know what E(h2i) is.
+* manual), βEIV . But we rarely know what E(η^2) is.
 
 
 *** 控制变量的选择方法
@@ -21,8 +21,6 @@ ivlasso
 ssc install ivreg2
 // IV/GMM estimator
 // ivreg <depvar> <exog vars> (<endog vars> = <instruments>)
-
-
 
 ssc install ranktest
 
@@ -98,6 +96,31 @@ sum mse_ols mse_iv
 
 use maketable8, clear
 keep if baseco==1
+
+//ivreg2 <depvar> <exog vars> (<endog vars> = <instruments>), options
+
+//The main options:
+//robust Use the heteroskedastic-consistent SHC for the AVar
+//gmm2s Use 2-step Feasible Efficient GMM
+//cue Use continuously-updated (CUE) GMM
+//small Use finite-sample formula for SEs (comparable to regress)
+//first Report a full set of first-stage regressions
+//ffirst Report a summary of the first-stage regression results and tests
+
+//What the combinations mean:
+//<nothing> OLS or IV as efficient GMM. Sclassical in Wn and in AVar.
+//robust OLS or IV as inefficient GMM. Sclassical in Wn. SHC in AVar.
+//robust gmm2s 2-step Feasible Efficient GMM. SHC in Wn and in AVar.
+
+
+//GMM Distance tests (in options, after comma):
+//endog(<endog vars>) Test if listed endogenous regressors can be treated as exogenous. Saved test stat: 
+e(estat).
+//orthog(<exog vars>) Test if listed exogenous regressors should be treated as endogenous. Saved test stat: 
+c(estat).
+//orthog(<instruments>) Test if listed excluded instruments are endogenous and should be dropped as excluded IVs. Saved test stat: 
+c(estat).
+
 
 // ivreg2 y x1 x2 x3 (v1 v2 = z1 z2 z3 z4), <options>
 //     y  = dependent variable
