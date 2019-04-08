@@ -116,8 +116,12 @@ suest
 //model B to be part of the same "cluster".
 
 
+*** 显著性水平列表，pvalue,star,se
 
 
+estimates table mfx_lpm mfx_probit, b(%7.4f) star
+estimates table mfx_lpm mfx_probit, b(%7.4f) p(%7.4f)
+estimates table mfx_lpm mfx_probit, b(%7.4f) se(%7.4f)
 
 
 
