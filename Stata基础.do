@@ -19,8 +19,14 @@ hist b, bin(20) normal
 kdensity  b_ols if b_ols>0 & b_ols<2
 //b_ols 的pdf图
 
+tsline y
+//画时间序列的图
 
 
+
+
+统计特征
+tabstat lgdp_xt, stat(n mean variance)
 
 用forvale列表
 forvalues i=1/5 {
@@ -54,6 +60,10 @@ keep if baseco==1
 //比较发展殖民起源
 //gdp 与 政府机构质量的关系研究
 //GMM法
+
+webuse psidextract, clear
+//教育水平和工资的面板数据
+//教育年限 性别 是否是工会工作 婚姻状况 黑人
 
 
 
