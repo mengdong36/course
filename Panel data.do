@@ -4,6 +4,8 @@ ssc install center, replace
 ssc install xtabond2, replace
 ssc install ivreg2, replace
 ssc install ranktest, replace
+//The basic Stata static panel data estimator is xtreg. It will estimate FE, BE and RE models. 
+//To estimate using POLS or FD, use regress.
 
 webuse psidextract, clear
 //US Panel Study of Income Dynamics (PSID)
