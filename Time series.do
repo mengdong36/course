@@ -6,6 +6,7 @@ gen trend =_n
 gen date=yq(year,quarter)
 tsset date, quarterly 
 //tells Stata that the data are quarterly time series
+//date由数字变为1996q1形式
 
 
 regr lgdp trend 
@@ -75,6 +76,60 @@ dfgls lgdp, maxlag(5) trend
 //suited for determining p with integrated data and suggest a minimising a modified AIC,
 //shown as Min MAIC in the table produced by Stata. While it is necessary in Stata to run ADF
 //tests for each p separately, the Stata command of the DF‐GLS test conveniently provides a whole set.
+
+*** ARMA/AR/MA model estimation
+
+arima dlgdp if tin(1960q1, 2013q4), ar(1/9)
+estimates store AR9
+//Estimate some candidate pure AR models
+//tin 限制估计区间
+
+arima dlgdp if tin(1960q1, 2013q4), arima(3,0,3) 
+estimates store ARMA33
+
+arima dlgdp if tin(1960q1, 2013q4), ar(1/3) ma(2 3) 
+//drop first MA
+
+
+
+
+
+
+
+
+
+*** 确定lag 
+estimates table AR8 AR7 AR6 AR5 AR4 AR3 AR2 , b(%7.3f) p(%7.2f) 
+//Produce summary table comparing pure AR models - reporting coefficients and p-values
+
+estimates stats AR8 AR7 AR6 AR5 AR4 AR3 AR2
+//Produce table of information criteria for pure AR models----stats
+
+**** LR检验
+
+lrtest AR8 AR3
+lrtest AR8 AR2
+//Nested tests of validity of model reduction: is it data admissible to reduce AR8 to AR3 or AR2? 
+
+
+*** Post estimation evaluation of possible AR models
+
+qui arima dlgdp if tin(1960q1, 2013q4), ar(1/8)
+predict r_AR8 if tin(1960q1, 2013q4), residuals 
+corrgram r_AR8, lags(10)
+//check residual diagnostics for AR8 model
+
+*** 对残差的检验
+wntestb r_AR8 
+//a cumulative periodogram of the residuals which offers
+//evidence for or against white noise residuals.
+
+wntestq r_AR8, lag(10)
+//Parymanteau test for white noise--Q test?
+
+estat aroots
+//check stationarity of the AR8 model
+
 
 
 
