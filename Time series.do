@@ -8,11 +8,15 @@ tsset date, quarterly
 //tells Stata that the data are quarterly time series
 //date由数字变为1996q1形式
 
-
 regr lgdp trend 
 predict fitted /*stores fitted values*/
 predict lgdp_xt, residuals /*stores residuals = deviations in lnGDP from trend*/
 //被解释变量的去趋势处理
+
+generate t=tq(1951q4)+ _n - 1
+format t %tq
+tsset t
+//第一列1991Q1设置time variable
 
 *** ACF 图形
 ac lgdp, lags(8) saving(ch1,replace) ylabel(-1(1)1) title("full sample acf for lgdp") 
@@ -79,6 +83,12 @@ dfgls lgdp, maxlag(5) trend
 
 *** ARMA/AR/MA model estimation
 
+* model identification;
+* model estimation;
+* diagnostic checking, and
+* model selection.
+
+
 arima dlgdp if tin(1960q1, 2013q4), ar(1/9)
 estimates store AR9
 //Estimate some candidate pure AR models
@@ -89,12 +99,6 @@ estimates store ARMA33
 
 arima dlgdp if tin(1960q1, 2013q4), ar(1/3) ma(2 3) 
 //drop first MA
-
-
-
-
-
-
 
 
 
@@ -129,7 +133,7 @@ wntestq r_AR8, lag(10)
 
 estat aroots
 //check stationarity of the AR8 model
-
+//The inverse roots of the AR polynomial must all lie inside the unit circle for the process to be stationary.
 
 
 
