@@ -22,6 +22,8 @@ kdensity  b_ols if b_ols>0 & b_ols<2
 tsline y
 //画时间序列的图
 
+twoway (tsline c y) (tsline a, yaxis(2))
+//左右轴不同
 
 
 
