@@ -1,3 +1,8 @@
+*** 导入数据
+
+cd M:\1Data
+import excel "M:\1Data\stata.xlsx", sheet("sheet1") firstrow
+
 
 *** 画图
 cumul p, gen(cdf_p)
